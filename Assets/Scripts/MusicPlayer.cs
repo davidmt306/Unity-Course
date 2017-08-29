@@ -12,6 +12,7 @@ public class MusicPlayer : MonoBehaviour {
 			instance = this;
 			GameObject.DontDestroyOnLoad(gameObject);
 		}
+		
 	}
 	
 	// Update is called once per frame
