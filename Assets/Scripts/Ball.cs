@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 	private Paddle paddle;
-	private bool hasStarted = false;
+	public bool hasStarted = false;
 	private Vector3 paddleToBallVector;
 	// Use this for initialization
 	void Start () {
 		paddle = GameObject.FindObjectOfType<Paddle>();
-		paddleToBallVector = this.transform.position - paddle.transform.position;
+		paddleToBallVector = this.transform.position - paddle.transform.position;	
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,12 @@ public class Ball : MonoBehaviour {
 				hasStarted = true;
 				this.rigidbody2D.velocity = new Vector2(2f, 10f);
 			}
+		}	
+	}
+	
+	void OnCollisionEnter2D (Collision2D collision) {
+		if (hasStarted) {
+			audio.Play();
 		}
-		
 	}
 }

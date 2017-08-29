@@ -3,7 +3,9 @@ using System.Collections;
 
 public class LoseCollider : MonoBehaviour {
 
+	public AudioClip lose;
 	private LevelManager levelManager;
+	private Ball ball;
 	
 	void Start () {
 		levelManager = GameObject.FindObjectOfType<LevelManager>();
@@ -14,6 +16,8 @@ public class LoseCollider : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D (Collision2D collision) {
-		levelManager.LoadLevel("Lose");
+		AudioSource.PlayClipAtPoint (lose, transform.position);
+		levelManager.LoadLevel("Lose");	
+		
 	}
 }
