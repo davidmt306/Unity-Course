@@ -4,6 +4,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	public float speed = 15.0f;
 	public float padding = 1f;
+	public float projectileSpeed;
+	public float firingRate;
+	public GameObject projectile;
 	float xmin;
 	float xmax;
 
@@ -17,7 +20,21 @@ public class PlayerController : MonoBehaviour {
 		xmax = rightmost.x - padding;
 	}
 
+	void Fire () {
+		GameObject beam = Instantiate (projectile, transform.position, Quaternion.identity) as GameObject;
+		beam.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
+	}
+
 	void Update () {
+		// Crear el laser en la posicion del jugador cuando presiono espacio y darle direccion
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			InvokeRepeating ("Fire", 0.000001f, firingRate);
+		} 
+
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			CancelInvoke ("Fire");
+		}
+
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			//transform.position += new Vector3(-speed*Time.deltaTime, 0, 0);
 			transform.position += Vector3.left * speed * Time.deltaTime;
