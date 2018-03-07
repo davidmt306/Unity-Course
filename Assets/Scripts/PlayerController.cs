@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 			if (health <= 0) {
 				Destroy (gameObject);
 			}
-			Debug.Log ("Hit by a projectile");
+			//Debug.Log ("Hit by a projectile");
 		}
 	}
 }

@@ -70,12 +70,17 @@ public class EnemySpawner : MonoBehaviour {
 		if (AllMembersDead()) {
 			Debug.Log ("Empty formation");
 			SpawnUntilFull ();
+			if (Random.value < 0.5) {
+				SpawnUntilFull ();
+			} else {
+				SpawnEnemies ();
+			}
 		}
 	}
 
 	Transform NextFreePosition () {
 		foreach (Transform childPositionGameObject in transform) {
-			if (childPositionGameObject.childCount == 0) {
+			if (childPositionGameObject.childCount <= 0) {
 				return childPositionGameObject;
 			}
 		}
