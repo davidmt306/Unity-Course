@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 		Vector3 rightBoundary = Camera.main.ViewportToWorldPoint (new Vector3 (1, 0, distanceToCamera));
 		xmax = rightBoundary.x;
 		xmin = leftBoundary.x;
-		SpawnUntilFull ();
+		SpawnEnemies ();
 	}
 
 	// Crea los enemigos
