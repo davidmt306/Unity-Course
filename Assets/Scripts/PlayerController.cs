@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour {
 	public float projectileSpeed;
 	public float firingRate;
 	public float health;
-
+	public AudioClip fireSound;
+	public AudioClip deathSound;
+	public AudioClip hitSound;
 	public GameObject projectile;
 	float xmin;
 	float xmax;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 startPosition = transform.position + new Vector3 (0, 1, 0);
 		GameObject beam = Instantiate (projectile, startPosition, Quaternion.identity) as GameObject;
 		beam.rigidbody2D.velocity = new Vector3(0, projectileSpeed, 0);
+		AudioSource.PlayClipAtPoint (fireSound, transform.position);
 	}
 
 	void Update () {
@@ -58,6 +61,9 @@ public class PlayerController : MonoBehaviour {
 			missile.Hit();
 			if (health <= 0) {
 				Destroy (gameObject);
+				AudioSource.PlayClipAtPoint(deathSound, transform.position);
+			} else {
+				AudioSource.PlayClipAtPoint(hitSound, transform.position);
 			}
 			//Debug.Log ("Hit by a projectile");
 		}

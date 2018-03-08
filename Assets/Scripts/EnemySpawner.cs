@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	public float height = 5f;
 	public float speed;
 	public float spawnDelay;
+	public AudioClip tieFighterSound;
 
 	private bool movingRight = true;
 	private float xmax;
@@ -29,6 +30,7 @@ public class EnemySpawner : MonoBehaviour {
 			GameObject enemy = Instantiate (enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
 			// Crear el enemy dentro del GameObject llamado Enemy Formation
 			enemy.transform.parent = child;
+			AudioSource.PlayClipAtPoint (tieFighterSound, child.transform.position);
 		}
 	}
 
@@ -42,6 +44,7 @@ public class EnemySpawner : MonoBehaviour {
 		}
 		if (NextFreePosition ()) {
 			Invoke ("SpawnUntilFull", spawnDelay);
+			AudioSource.PlayClipAtPoint (tieFighterSound, transform.position);
 		}
 	}
 
